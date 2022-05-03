@@ -29,31 +29,7 @@ Route::get('/', function () {
 });
 
 //新しい「本」を追加 追加ボタンを押すとここにルーティングされる 本の情報を持っているので引数は$request
-Route::post('/books',function (Request $request) {
-    //バリデーション all()は入力値を全て連想配列で取得
-    $validator = Validator::make($request->all(), [
-        //複数のバリデーションの設定が可能↓
-        'item_name' => 'required|max:255',
-        'item_number' => 'required|min:1|max:3',
-        'item_amount' => 'required|max:6',
-        'published' => 'required',
-    ]);
-
-    //バリデーションエラー
-    if ($validator->fails()) {
-        return redirect('/') //ルートへリダイレクト
-            ->withInput() //セッションに値を保存
-            ->withErrors($validator);
-    }
-    //Eloquentモデル
-    $books = new Book;
-    $books -> item_name = $request->item_name;
-    $books -> item_number = $request->item_number;
-    $books -> item_amount = $request->item_amount;
-    $books -> published = $request->published;
-    $books -> save(); //ModelクラスがDB登録のsaveメソッドを持っている。
-    return redirect('/');
-});
+Route::post('/books','BooksController@store');
 
 //本を削除 削除する本の情報渡したいので引数は$book
 Route::delete('/book/{book}',function (Book $book) {
@@ -68,28 +44,4 @@ Route::post('/booksedit/{books}',function (Book $books) {
 });
 
 //更新処理 更新内容を入力した情報を渡したいので$request
-Route::post('/books/update', function(Request $request){
-    //バリデーション
-        $validator = Validator::make($request->all(), [
-            'id' => 'required',
-            'item_name' => 'required|min:3|max:255',
-            'item_number' => 'required|min:1|max:3',
-            'item_amount' => 'required|max:6',
-            'published' => 'required',
-    ]);
-    //バリデーション:エラー
-        if ($validator->fails()) {
-            return redirect('/')
-                ->withInput()
-                ->withErrors($validator);
-    }
-    //データ更新 更新処理のため、newでレコードの生成ではなくfindメソッドを利用
-    //モデル::find('id値');とすることで等しいレコードを取り出す
-    $books = Book::find($request->id);
-    $books->item_name   = $request->item_name;
-    $books->item_number = $request->item_number;
-    $books->item_amount = $request->item_amount;
-    $books->published   = $request->published;
-    $books->save();
-    return redirect('/');
-});
+Route::post('/books/update', 'BooksController@update');
