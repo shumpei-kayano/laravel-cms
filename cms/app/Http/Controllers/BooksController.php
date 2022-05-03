@@ -28,13 +28,13 @@ class BooksController extends Controller
         $book->delete(); //Modelクラスにdeleteメソッドが用意されている。
         return redirect('/');
     }
-    
+
     //更新画面
-    public function edit(Book $books)
+    public function edit(Book $book)
     {
         //{books}id 値を取得 => Book $books id 値の1レコード取得
         return view('booksedit', [
-            'book' => $books
+            'book' => $book
         ]);
     }
 
