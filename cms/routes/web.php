@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models;
-use Dotenv\Validator;
+use App\Models\Book;
+// use Dotenv\Validator;
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Validator;
 
 /*
 |--------------------------------------------------------------------------
