@@ -9,6 +9,35 @@ use Auth;
 
 class BooksController extends Controller
 {
+    //本ダッシュボード表示
+    public function index()
+    {
+        //created_atはDBに作成日時で登録されている
+        $books = Book::orderBy('created_at', 'asc')->get();
+        //books.blade.phpの呼び出し
+        return view('books', [
+            //view関数に配列データを渡したら、books.blade.phpビューの中で反復処理を行い、HTMLテーブル要素を作成して表示する。
+            //'ビュー側で使用する変数名' => 値（変数/配列/オブジェクト）
+            'books' => $books
+        ]);
+    }
+
+    //削除処理
+    public function destroy(Book $book)
+    {
+        $book->delete(); //Modelクラスにdeleteメソッドが用意されている。
+        return redirect('/');
+    }
+    
+    //更新画面
+    public function edit(Book $books)
+    {
+        //{books}id 値を取得 => Book $books id 値の1レコード取得
+        return view('booksedit', [
+            'book' => $books
+        ]);
+    }
+
     //更新
     public function update(Request $request)
     {
