@@ -13,7 +13,7 @@ class BooksController extends Controller
     public function index()
     {
         //created_atはDBに作成日時で登録されている
-        $books = Book::orderBy('created_at', 'asc')->get();
+        $books = Book::orderBy('created_at', 'asc')->paginate(3);
         //books.blade.phpの呼び出し
         return view('books', [
             //view関数に配列データを渡したら、books.blade.phpビューの中で反復処理を行い、HTMLテーブル要素を作成して表示する。

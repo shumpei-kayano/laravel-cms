@@ -51,5 +51,6 @@ $app->singleton(
 | from the actual running of the application and sending responses.
 |
 */
+// Illuminate\Pagination\AbstractPaginator::defaultView("pagination::bootstarp-5");
 
 return $app;
