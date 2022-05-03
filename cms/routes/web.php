@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use app\Models\Book;
-// use Dotenv\Validator;
+use App\Models;
+use Dotenv\Validator;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+// use Illuminate\Support\Facades\Validator;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +18,11 @@ use Illuminate\Support\Facades\Validator;
 */
 //本のダッシュボード表示
 Route::get('/', function () {
-    return view('books');
+    $books = Book::orderBy('created_at', 'asc')->get();
+    return view('books', [
+        //view関数に配列データを渡したら、books.blade.phpビューの中で反復処理を行い、HTMLテーブル要素を作成して表示する。
+        'books' => $books
+    ]);
 });
 
 //新しい「本」を追加
