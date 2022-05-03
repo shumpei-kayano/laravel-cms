@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Validator;
 */
 //本のダッシュボード表示
 Route::get('/', function () {
+    //created_atはDBに作成日時で登録されている
     $books = Book::orderBy('created_at', 'asc')->get();
     return view('books', [
         //view関数に配列データを渡したら、books.blade.phpビューの中で反復処理を行い、HTMLテーブル要素を作成して表示する。
@@ -44,7 +45,7 @@ Route::post('/books',function (Request $request) {
     $books -> item_name = $request->item_name;
     $books -> item_number = '1';
     $books -> item_amount = '1000';
-    $books -> publiched = '2017-03-07 00:00:00';
+    $books -> published = '2017-03-07 00:00:00';
     $books -> save(); //ModelクラスがDB登録のsaveメソッドを持っている。
     return redirect('/');
 });

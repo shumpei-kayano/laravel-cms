@@ -39,7 +39,7 @@
         <div class="card-title">
             現在の本
         </div>
-        <div class="table table-striped task-table">
+        <table class="table table-striped task-table">
             {{--  テーブルヘッダ  --}}
             <thead>
                 <th>本一覧</th>
@@ -68,7 +68,7 @@
                     </tr>
                 @endforeach
             </tbody>
-        </div>
+        </table>
     </div>
     @endif
     {{--  Book：既に登録されている本のリスト  --}}
