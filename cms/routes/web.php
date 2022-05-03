@@ -51,5 +51,6 @@ Route::post('/books',function (Request $request) {
 
 //本を削除
 Route::delete('/book/{book}',function (Book $book) {
-    //
+    $book->delete(); //Modelクラスにdeleteメソッドが用意されている。
+    return redirect('/');
 });

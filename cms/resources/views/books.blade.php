@@ -14,6 +14,7 @@
 
         {{--  本登録フォーム  --}}
         <form action="{{ url('books') }}" method="POST" class="form-horizontal">
+            {{ csrf_field() }}
             {{--  本のタイトル  --}}
             <div class="form-group">
                 <div class="col-sm-6">
@@ -54,7 +55,15 @@
                         </td>
                         {{--  本削除ボタン  --}}
                         <td>
-                            削除
+                            <form action="{{ url('book/'.$book->id) }}" method="POST">
+                                {{ csrf_field() }}
+                                {{--  送信メソッドをdeleteに見せかけた擬似的メソッド  --}}
+                                {{ method_field('DELETE') }}
+
+                                <button type="submit" class="btn btn-danger">
+                                    削除
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
